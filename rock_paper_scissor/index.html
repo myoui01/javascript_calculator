@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel, Tesoura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="centralized-div">
+        <h1 style="margin-bottom: 40px;">Pedra, Papel, Tesoura</h1>
+        <div class="container">
+            <div class="display"></div>
+            <div class="imgs">
+                <img src="pedra.png" style="width: 50px;" onclick="jogar('pedra')"/>
+                <img src="paper.png" style="width: 50px;" onclick="jogar('papel')"/>
+                <img src="scissor.png" style="width: 50px;" onclick="jogar('tesoura')"/>
+            </div>
+        </div>
+        <p id="resultado" class="warning"></p>
+    </div>
+
+     
+    <script>
+        function jogar(jogador) {
+            const opcoes = ['pedra', 'papel', 'tesoura'];
+            const computador = opcoes[Math.floor(Math.random() * opcoes.length)];
+            
+            console.log("Jogador:", jogador);
+            console.log("Computador:", computador);
+
+            const resultado = document.getElementById('resultado');
+            const display = document.querySelector('.display');
+            display.textContent = `${jogador} x ${computador}`;
+
+            if (jogador === computador) {
+                resultado.textContent = "Empate!";
+                resultado.classList.remove('warning');
+            } else if (
+                (jogador === 'pedra' && computador === 'tesoura') ||
+                (jogador === 'papel' && computador === 'pedra') ||
+                (jogador === 'tesoura' && computador === 'papel')
+            ) {
+                resultado.textContent = "Parabéns, você venceu!";
+                resultado.classList.remove('warning');
+            } else {
+                resultado.textContent = "Computador vence!";
+                resultado.classList.add('warning');
+            }
+        }
+    </script>
+</body>
+</html>
